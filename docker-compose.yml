@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: battery_tracker_postgres
+    environment:
+      POSTGRES_USER: battery_tracker
+      POSTGRES_PASSWORD: tothemoon
+      POSTGRES_DB: battery_tracker
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
