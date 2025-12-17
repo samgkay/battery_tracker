@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS test_table (
+    id SERIAL PRIMARY KEY,
+    source TEXT NOT NULL,
+    value INTEGER NOT NULL,
+    fetched_at TIMESTAMP NOT NULL,
+    inserted_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
