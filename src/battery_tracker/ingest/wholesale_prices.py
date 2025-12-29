@@ -128,11 +128,16 @@ def backfill_mid_to_table(
                 flush=True,
             )
             records = fetch_mid(from_iso, to_iso, provider)
-            normalized = normalize_mid_records(records)
+            filtered = [record for record in records if record.get("dataProvider") == provider]
+            print(
+                f"Window {from_iso} -> {to_iso}: fetched {len(records)} records, after provider filter {len(filtered)}",
+                flush=True,
+            )
+            normalized = normalize_mid_records(filtered)
             upsert_mid_prices(conn, table_name, normalized)
             total_rows += len(normalized)
             print(
-                f"Window {from_iso} -> {to_iso}: fetched {len(records)} records, upserted {len(normalized)} rows",
+                f"Window {from_iso} -> {to_iso}: upserted {len(normalized)} rows",
                 flush=True,
             )
 
